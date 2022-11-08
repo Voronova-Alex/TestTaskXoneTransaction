@@ -5,14 +5,16 @@ from .models import Category, Transaction
 class CategoryCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ('category',)
+        fields = ('id', 'category',)
 
 
 class TransactionCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
-        fields = ('summa_transaction',
-                  'date_time_transaction',
+        fields = ('id',
+                  'summa_transaction',
+                  'date_transaction',
+                  'time_transaction',
                   'category_transaction',
                   'organization',
                   'description',
