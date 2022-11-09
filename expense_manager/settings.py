@@ -137,3 +137,15 @@ DJOSER = {
     'SEND_ACTIVATION_EMAIL': False,
     'SERIALIZERS': {},
 }
+
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 2525
+EMAIL_HOST_USER = "sarancha7@mail.ru"
+EMAIL_HOST_PASSWORD = "uy3ws1zzR29QYuVYJ8pW"
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+
+CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
+CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/0"

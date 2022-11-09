@@ -9,11 +9,9 @@ class Category(models.Model):
     def __str__(self):
         return self.category
 
-
     class Meta:
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
-
 
 
 class Transaction(models.Model):
@@ -23,14 +21,8 @@ class Transaction(models.Model):
     time_transaction = models.TimeField(auto_now_add=True, verbose_name='Время транзакции')
     category_transaction = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категория')
     organization = models.CharField(max_length=30, verbose_name='Организация')
-    description = models.TextField(verbose_name='Описание')
-
+    description = models.TextField(verbose_name='Описание', null=True, blank=True)
 
     class Meta:
         verbose_name = 'Tранзакция'
         verbose_name_plural = 'Tранзакции'
-
-
-
-
-# Create your models here.
