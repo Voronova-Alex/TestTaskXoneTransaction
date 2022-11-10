@@ -58,7 +58,7 @@ class ApiTransactionSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def list(self, request):
-        serializer = self.get_serializer(self.get_queryset(), many=True)
+        serializer = self.get_serializer(self.filter_queryset(self.get_queryset()), many=True)
         return Response(serializer.data)
 
     def retrieve(self, request, pk):

@@ -18,7 +18,7 @@ from django.urls import include, path, re_path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('user/', include('user_app.urls')),
+    path('', include('user_app.urls')),
     path('auth/', include('djoser.urls')),
     re_path(r'^auth/', include('djoser.urls.authtoken')),
     path('', include('user_transactions.urls'))
