@@ -1,0 +1,63 @@
+version: "3.3"
+
+services:
+  db:
+    image: postgres:latest
+    container_name: django-db
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_HOST=${DB_HOST}
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    ports:
+      - "5432:5432"
+  web:
+    build: ..
+    container_name: django-backend
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/code
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_HOST=db
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - DB_ENGINE=${DB_ENGINE}
+      - EMAIL_HOST=${EMAIL_HOST}
+      - EMAIL_PORT=${EMAIL_PORT}
+      - EMAIL_HOST_USER=${EMAIL_HOST_USER}
+      - EMAIL_HOST_PASSWORD=${EMAIL_HOST_PASSWORD}
+      - EMAIL_USE_TLS=${EMAIL_USE_TLS}
+      - EMAIL_USE_SSL=${EMAIL_USE_SSL}
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    links:
+      - db:db
+  redis:
+    image: redis:alpine
+  celery:
+    build: ..
+    container_name: celery
+    restart: always
+    command: bash -c "celery -A expense_manager worker -l info"
+    depends_on:
+      - db
+      - redis
+      - web
+  celery-beat:
+    build: ..
+    command: bash -c "celery -A expense_manager beat -l info"
+    depends_on:
+      - db
+      - redis
+      - web
+      - celery
