@@ -3,3 +3,6 @@ db.sqlite3
 ../.idea
 venv
 *.pyc
+celerybeat-schedule.bak
+celerybeat-schedule.dat
+celerybeat-schedule.dir

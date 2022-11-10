@@ -19,7 +19,7 @@ def user_info(user, email):
                                                       date_transaction=date.today() - timedelta(days=1)).values_list(
             'summa_transaction', flat=True)
         if transaction_user:
-            transaction_statistics_user.append(f'{i} - {sum(transaction_user)}\n')
+            transaction_statistics_user.append(f'- {i}: {sum(transaction_user)}\n')
     if not transaction_statistics_user:
         transaction_statistics_user.append('Транзакций не было')
 
@@ -29,5 +29,5 @@ def user_info(user, email):
 def send(user_info):
     print(user_info)
     send_mail('Инфо',
-              f'Доброе утро,{user_info[1]}!\nТекущий баланс {user_info[2]}.\nВчерашнии транзакции:\n{user_info[3]}',
+              f'Доброе утро, {user_info[1]}!\nТекущий баланс: {user_info[2]}.\nВчерашнии транзакции:\n{user_info[3]}',
               settings.EMAIL_HOST_USER, user_info[0])
