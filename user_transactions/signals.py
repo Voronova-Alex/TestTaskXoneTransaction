@@ -1,7 +1,7 @@
 from django.dispatch import receiver
 from djoser.signals import user_registered
-from .models import Category
 
+from .models import Category
 
 DEFAULT_CATEGORY = ["Забота о себе",
                     "Зарплата",

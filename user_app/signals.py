@@ -1,8 +1,10 @@
+from django.db.models.signals import post_delete, post_save
 from django.dispatch import receiver
 from djoser.signals import user_registered
-from django.db.models.signals import post_save, post_delete
+
+from user_transactions.models import Category, Transaction
+
 from .models import Profile
-from user_transactions.models import Transaction, Category
 
 
 @receiver(user_registered)

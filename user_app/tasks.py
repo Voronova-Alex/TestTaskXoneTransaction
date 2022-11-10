@@ -1,5 +1,6 @@
 from expense_manager.celery import app
-from .service import list_user_mail, user_info, send
+
+from .service import list_user_mail, send, user_info
 
 
 @app.task

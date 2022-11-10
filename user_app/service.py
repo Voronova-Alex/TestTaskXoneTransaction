@@ -1,8 +1,10 @@
-from django.core.mail import send_mail
 from datetime import date, timedelta
-from django.contrib.auth.models import User
-from user_transactions.models import Transaction, Category
+
 from django.conf import settings
+from django.contrib.auth.models import User
+from django.core.mail import send_mail
+
+from user_transactions.models import Category, Transaction
 
 
 def list_user_mail():
